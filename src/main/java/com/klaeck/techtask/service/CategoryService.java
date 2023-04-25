@@ -2,6 +2,7 @@ package com.klaeck.techtask.service;
 
 import com.klaeck.techtask.entity.Category;
 import com.klaeck.techtask.dto.CategoryDto;
+import com.klaeck.techtask.exception.NotFoundException;
 import com.klaeck.techtask.repository.CategoryRepo;
 
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public class CategoryService {
 
     @Transactional(readOnly = true)
     public CategoryDto read(int id) {
-        Category category = repo.findById(id).orElseThrow(IllegalArgumentException::new);
+        Category category = repo.findById(id).orElseThrow(NotFoundException::new);
 
         return new CategoryDto(category);
     }
@@ -28,7 +29,7 @@ public class CategoryService {
             return;
         }
 
-        Category categoryToUpd = repo.findById(id).orElseThrow(IllegalArgumentException::new);
+        Category categoryToUpd = repo.findById(id).orElseThrow(NotFoundException::new);
         categoryToUpd.setName(dto.getName());
     }
 

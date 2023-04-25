@@ -1,4 +1,4 @@
-package com.klaeck.techtask.controller;
+package com.klaeck.techtask.exception;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +23,13 @@ public class ControllerExceptionHandler {
         logError(request, ex);
 
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = NotFoundException.class)
+    public ResponseEntity<String> handleNotExistingEntity(HttpServletRequest request, NotFoundException ex){
+        logError(request, ex);
+
+        return new ResponseEntity<>("Entity not found", HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(value = DataIntegrityViolationException.class)
