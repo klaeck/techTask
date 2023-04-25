@@ -13,6 +13,8 @@ CategoryIntegrationTest is a test:)<br>
 1. Security <br>
 Basic security is implemented by SecurityConfig class. <br>
 2. Exception mapping <br>
-There are few exception mapped: EmptyResultDataAccessException stands for not existing entities in repo, DataIntegrityViolationException is for any Postgre exceptions, and basic handler for any other exceptions.<br>
+There are few exception mapped: EmptyResultDataAccessException, DataIntegrityViolationException, NotFoundException, and basic handler for any other exceptions.<br>
 3. Liquibase migration <br>
 I've prepared a migration for DB with Liquibase Maven plugin.
+<br> <br> <br>
+<h4><b>⚡️A new branch with feature-based structure was created, please take a look</b></h4>
