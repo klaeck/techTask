@@ -1,0 +1,51 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="1" author="Andrii Solomennyi">
+        <dropTable tableName="card" cascadeConstraints="true"/>
+        <createTable tableName="card">
+            <column name="id" type="serial">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="name" type="varchar(128)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+
+        <dropTable tableName="category" cascadeConstraints="true"/>
+        <createTable tableName="category">
+            <column name="id" type="serial">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(128)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+
+        <dropTable tableName="card_to_category"/>
+        <createTable tableName="card_to_category">
+            <column name="card_id" type="integer">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="category_id" type="integer">
+                <constraints primaryKey="true"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="card_to_category" baseColumnNames="card_id" constraintName="card_id_fk" referencedTableName="card" referencedColumnNames="id" onDelete="CASCADE"/>
+        <addForeignKeyConstraint baseTableName="card_to_category" baseColumnNames="category_id" constraintName="category_id_fk" referencedTableName="category" referencedColumnNames="id" onDelete="CASCADE"/>
+
+        <insert tableName="card">
+            <column name="name">DefaultCard</column>
+        </insert>
+        <insert tableName="category">
+            <column name="name">DefaultCategory</column>
+        </insert>
+        <insert tableName="card_to_category">
+            <column name="card_id">1</column>
+            <column name="category_id">1</column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
