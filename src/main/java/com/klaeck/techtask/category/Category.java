@@ -1,4 +1,4 @@
-package com.klaeck.techtask.entity;
+package com.klaeck.techtask.category;
 
 import lombok.Data;
 

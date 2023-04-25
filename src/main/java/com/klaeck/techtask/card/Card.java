@@ -1,5 +1,6 @@
-package com.klaeck.techtask.entity;
+package com.klaeck.techtask.card;
 
+import com.klaeck.techtask.category.Category;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -8,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Data
-public class Card {
+class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

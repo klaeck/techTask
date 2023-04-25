@@ -1,14 +1,11 @@
-package com.klaeck.techtask.service;
+package com.klaeck.techtask.category;
 
-import com.klaeck.techtask.entity.Category;
-import com.klaeck.techtask.dto.CategoryDto;
-import com.klaeck.techtask.repository.CategoryRepo;
-
+import com.klaeck.techtask.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class CategoryService {
+class CategoryService {
     private final CategoryRepo repo;
 
     public CategoryService(CategoryRepo repo) {
@@ -17,7 +14,7 @@ public class CategoryService {
 
     @Transactional(readOnly = true)
     public CategoryDto read(int id) {
-        Category category = repo.findById(id).orElseThrow(IllegalArgumentException::new);
+        Category category = repo.findById(id).orElseThrow(NotFoundException::new);
 
         return new CategoryDto(category);
     }
@@ -28,8 +25,8 @@ public class CategoryService {
             return;
         }
 
-        Category categoryToUpd = repo.findById(id).orElseThrow(IllegalArgumentException::new);
-        categoryToUpd.setName(dto.getName());
+        Category category = repo.findById(id).orElseThrow(NotFoundException::new);
+        category.setName(dto.getName());
     }
 
     @Transactional

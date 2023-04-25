@@ -1,6 +1,5 @@
-package com.klaeck.techtask.dto;
+package com.klaeck.techtask.category;
 
-import com.klaeck.techtask.entity.Category;
 import lombok.Data;
 
 import javax.validation.constraints.Min;

@@ -1,13 +1,11 @@
-package com.klaeck.techtask.controller;
+package com.klaeck.techtask.category;
 
-import com.klaeck.techtask.dto.CategoryDto;
-import com.klaeck.techtask.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/category")
-public class CategoryDataController {
+class CategoryDataController {
     @Autowired
     private CategoryService service;
 

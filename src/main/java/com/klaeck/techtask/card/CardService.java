@@ -1,11 +1,8 @@
-package com.klaeck.techtask.service;
+package com.klaeck.techtask.card;
 
-import com.klaeck.techtask.entity.Card;
-import com.klaeck.techtask.entity.Category;
-import com.klaeck.techtask.dto.CardRequestDto;
-import com.klaeck.techtask.dto.CardResponseDto;
-import com.klaeck.techtask.repository.CardRepo;
-import com.klaeck.techtask.repository.CategoryRepo;
+import com.klaeck.techtask.category.Category;
+import com.klaeck.techtask.category.CategoryRepo;
+import com.klaeck.techtask.exception.NotFoundException;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +15,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class CardService {
+class CardService {
     private final CardRepo cardRepo;
     private final CategoryRepo categoryRepo;
     private final SimpleJdbcInsert jdbcInsert;
@@ -31,16 +28,16 @@ public class CardService {
 
     @Transactional(readOnly = true)
     public CardResponseDto read(int id) {
-        Card card = cardRepo.findById(id).orElseThrow(IllegalArgumentException::new);
+        Card card = cardRepo.findById(id).orElseThrow(NotFoundException::new);
         return new CardResponseDto(card);
     }
 
     @Transactional
     public void update(int id, CardRequestDto update) {
-        Card cardToUpdate = cardRepo.findById(id).orElseThrow(IllegalArgumentException::new);
+        Card card = cardRepo.findById(id).orElseThrow(NotFoundException::new);
 
         if (update.getName() != null) {
-            cardToUpdate.setName(update.getName());
+            card.setName(update.getName());
         }
 
         if (update.getCategoryIds() != null) {

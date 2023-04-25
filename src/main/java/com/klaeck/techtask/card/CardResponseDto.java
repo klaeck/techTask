@@ -1,13 +1,13 @@
-package com.klaeck.techtask.dto;
+package com.klaeck.techtask.card;
 
-import com.klaeck.techtask.entity.Card;
+import com.klaeck.techtask.category.CategoryDto;
 import lombok.Data;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
-public class CardResponseDto {
+class CardResponseDto {
     private String name;
     private List<CategoryDto> categories;
 

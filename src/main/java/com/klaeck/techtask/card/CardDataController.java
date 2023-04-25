@@ -1,14 +1,11 @@
-package com.klaeck.techtask.controller;
+package com.klaeck.techtask.card;
 
-import com.klaeck.techtask.dto.CardRequestDto;
-import com.klaeck.techtask.dto.CardResponseDto;
-import com.klaeck.techtask.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController()
 @RequestMapping(path = "/card")
-public class CardDataController {
+class CardDataController {
     @Autowired
     private CardService service;
 

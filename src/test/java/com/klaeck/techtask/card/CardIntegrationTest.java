@@ -1,12 +1,9 @@
-package com.klaeck.techtask;
+package com.klaeck.techtask.card;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.klaeck.techtask.dto.CardRequestDto;
-import com.klaeck.techtask.entity.Card;
-import com.klaeck.techtask.entity.Category;
-import com.klaeck.techtask.repository.CardRepo;
-import com.klaeck.techtask.repository.CategoryRepo;
-import com.klaeck.techtask.service.CardService;
+import com.klaeck.techtask.category.Category;
+import com.klaeck.techtask.category.CategoryRepo;
+import junit.framework.AssertionFailedError;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,7 +48,6 @@ public class CardIntegrationTest {
     @PersistenceContext
     private EntityManager entityManager;
 
-
     @Autowired
     WebApplicationContext context;
 
@@ -90,7 +86,7 @@ public class CardIntegrationTest {
 
         int cardId = Integer.parseInt(result.getResponse().getContentAsString());
 
-        Card card = cardRepo.findById(cardId).orElseThrow(junit.framework.AssertionFailedError::new);
+        Card card = cardRepo.findById(cardId).orElseThrow(AssertionFailedError::new);
 
         assertEquals(name, card.getName());
         assertEquals(testCategoriesIds, card.getCategories().stream()
@@ -125,7 +121,7 @@ public class CardIntegrationTest {
         // then
         entityManager.clear();
 
-        Card card = cardRepo.findById(cardId).orElseThrow(junit.framework.AssertionFailedError::new);
+        Card card = cardRepo.findById(cardId).orElseThrow(AssertionFailedError::new);
 
         assertEquals(updatedName, card.getName());
         assertEquals(reducedCategories, card.getCategories().stream()
@@ -153,7 +149,7 @@ public class CardIntegrationTest {
         entityManager.flush();
         entityManager.clear();
 
-        Card card = cardRepo.findById(cardId).orElseThrow(junit.framework.AssertionFailedError::new);
+        Card card = cardRepo.findById(cardId).orElseThrow(AssertionFailedError::new);
 
         assertEquals(updatedName, card.getName());
         assertEquals(testCategoriesIds, card.getCategories().stream()
@@ -180,7 +176,7 @@ public class CardIntegrationTest {
         // then
         entityManager.clear();
 
-        Card card = cardRepo.findById(cardId).orElseThrow(junit.framework.AssertionFailedError::new);
+        Card card = cardRepo.findById(cardId).orElseThrow(AssertionFailedError::new);
 
         assertEquals(originalName, card.getName());
         assertEquals(reducedCategories, card.getCategories().stream()
@@ -206,7 +202,7 @@ public class CardIntegrationTest {
         // then
         entityManager.clear();
 
-        Card card = cardRepo.findById(cardId).orElseThrow(junit.framework.AssertionFailedError::new);
+        Card card = cardRepo.findById(cardId).orElseThrow(AssertionFailedError::new);
 
         assertEquals(originalName, card.getName());
         assertEquals(testCategoriesIds, card.getCategories().stream()
@@ -233,7 +229,7 @@ public class CardIntegrationTest {
         // then
         entityManager.clear();
 
-        Card card = cardRepo.findById(cardId).orElseThrow(junit.framework.AssertionFailedError::new);
+        Card card = cardRepo.findById(cardId).orElseThrow(AssertionFailedError::new);
 
         assertEquals(name, card.getName());
         assertEquals(testCategoriesIds, card.getCategories().stream()

@@ -1,9 +1,7 @@
-package com.klaeck.techtask;
+package com.klaeck.techtask.category;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.klaeck.techtask.dto.CategoryDto;
-import com.klaeck.techtask.entity.Category;
-import com.klaeck.techtask.repository.CategoryRepo;
+import junit.framework.AssertionFailedError;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -67,7 +65,7 @@ public class CategoryIntegrationTest {
 
         int categoryId = Integer.parseInt(result.getResponse().getContentAsString());
 
-        Category category = categoryRepo.findById(categoryId).orElseThrow(junit.framework.AssertionFailedError::new);
+        Category category = categoryRepo.findById(categoryId).orElseThrow(AssertionFailedError::new);
 
         assertEquals(name, category.getName());
     }
@@ -97,7 +95,7 @@ public class CategoryIntegrationTest {
         entityManager.flush();
         entityManager.clear();
 
-        Category category = categoryRepo.findById(id).orElseThrow(junit.framework.AssertionFailedError::new);
+        Category category = categoryRepo.findById(id).orElseThrow(AssertionFailedError::new);
 
         assertEquals(updatedName, category.getName());
     }
@@ -119,7 +117,7 @@ public class CategoryIntegrationTest {
         // then
         entityManager.clear();
 
-        Category category = categoryRepo.findById(id).orElseThrow(junit.framework.AssertionFailedError::new);
+        Category category = categoryRepo.findById(id).orElseThrow(AssertionFailedError::new);
 
         assertEquals(originalName, category.getName());
     }
