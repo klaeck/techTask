@@ -10,22 +10,22 @@ class CategoryDataController {
     private CategoryService service;
 
     @PutMapping
-    public int createCategory(@RequestBody CategoryDto dto) {
+    private int createCategory(@RequestBody CategoryDto dto) {
         return service.create(dto);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCategory(@PathVariable int id) {
+    private void deleteCategory(@PathVariable int id) {
         service.delete(id);
     }
 
     @PostMapping("/{id}")
-    public void updateCategory(@PathVariable(name = "id") int id, @RequestBody CategoryDto dto) {
+    private void updateCategory(@PathVariable(name = "id") int id, @RequestBody CategoryDto dto) {
         service.update(id, dto);
     }
 
     @GetMapping("/{id}")
-    public CategoryDto readCategory(@PathVariable int id) {
+    private CategoryDto readCategory(@PathVariable int id) {
         return service.read(id);
     }
 }

@@ -10,29 +10,29 @@ class CardDataController {
     private CardService service;
 
     @PutMapping
-    public int createCard(@RequestBody CardRequestDto dto) {
+    private int createCard(@RequestBody CardRequestDto dto) {
         return service.create(dto);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCard(@PathVariable int id) {
+    private void deleteCard(@PathVariable int id) {
         service.delete(id);
     }
 
     @PostMapping("/{id}")
-    public void updateCard(@PathVariable(name = "id") int id,
+    private void updateCard(@PathVariable(name = "id") int id,
                            @RequestBody CardRequestDto dto) {
         service.update(id, dto);
     }
 
     @PostMapping("/{id}/addCategories")
-    public void addCategoriesToCard(@PathVariable(name = "id") int id,
+    private void addCategoriesToCard(@PathVariable(name = "id") int id,
                                     @RequestBody CardRequestDto dto) {
         service.addCategories(id, dto);
     }
 
     @GetMapping("/{id}")
-    public CardResponseDto readCard(@PathVariable int id) {
+    private CardResponseDto readCard(@PathVariable int id) {
         return service.read(id);
     }
 }

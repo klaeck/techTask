@@ -20,7 +20,7 @@ class CardService {
     private final CategoryRepo categoryRepo;
     private final SimpleJdbcInsert jdbcInsert;
 
-    public CardService(CardRepo cardRepo, CategoryRepo categoryRepo, DataSource dataSource) {
+    CardService(CardRepo cardRepo, CategoryRepo categoryRepo, DataSource dataSource) {
         this.cardRepo = cardRepo;
         this.categoryRepo = categoryRepo;
         this.jdbcInsert = new SimpleJdbcInsert(dataSource).withTableName("card_to_category");
