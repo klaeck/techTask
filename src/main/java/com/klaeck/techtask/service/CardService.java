@@ -50,18 +50,18 @@ public class CardService {
     }
 
     @Transactional
-    public int create(CardRequestDto card) {
-        int cardId = cardRepo.save(new Card(card.getName())).getId();
+    public int create(CardRequestDto dto) {
+        int cardId = cardRepo.save(new Card(dto.getName())).getId();
 
         List<Integer> categoriesToInsert = new ArrayList<>();
 
-        if (card.getCategoryIds() != null) {
-            categoriesToInsert.addAll(card.getCategoryIds());
+        if (dto.getCategoryIds() != null) {
+            categoriesToInsert.addAll(dto.getCategoryIds());
         }
 
-        if (card.getNewCategories() != null) {
-            List<Category> newCategories = categoryRepo.saveAll(card.getNewCategories().stream()
-                    .map(dto -> new Category(dto.getName()))
+        if (dto.getNewCategories() != null) {
+            List<Category> newCategories = categoryRepo.saveAll(dto.getNewCategories().stream()
+                    .map(categoryDto -> new Category(categoryDto.getName()))
                     .collect(Collectors.toList()));
 
             categoriesToInsert.addAll(newCategories.stream()
@@ -96,11 +96,11 @@ public class CardService {
     }
 
     @Transactional
-    public void addCategories(int cardId, CardRequestDto cardRequestDto) {
-        if (cardRequestDto.getCategoryIds() == null) {
+    public void addCategories(int cardId, CardRequestDto dto) {
+        if (dto.getCategoryIds() == null) {
             return;
         }
 
-        insertCardToCategoryDependencies(cardId, cardRequestDto.getCategoryIds());
+        insertCardToCategoryDependencies(cardId, dto.getCategoryIds());
     }
 }

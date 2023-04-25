@@ -4,12 +4,10 @@ import com.klaeck.techtask.entity.Category;
 import com.klaeck.techtask.dto.CategoryDto;
 import com.klaeck.techtask.repository.CategoryRepo;
 
-import javax.transaction.Transactional;
-
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
 public class CategoryService {
     private final CategoryRepo repo;
 
@@ -17,26 +15,30 @@ public class CategoryService {
         this.repo = repo;
     }
 
+    @Transactional(readOnly = true)
     public CategoryDto read(int id) {
         Category category = repo.findById(id).orElseThrow(IllegalArgumentException::new);
 
         return new CategoryDto(category);
     }
 
-    public void update(int id, CategoryDto category) {
-        if (category.getName() == null) {
+    @Transactional
+    public void update(int id, CategoryDto dto) {
+        if (dto.getName() == null) {
             return;
         }
 
         Category categoryToUpd = repo.findById(id).orElseThrow(IllegalArgumentException::new);
-        categoryToUpd.setName(category.getName());
+        categoryToUpd.setName(dto.getName());
     }
 
+    @Transactional
     public void delete(int id) {
         repo.deleteById(id);
     }
 
-    public int create(CategoryDto category) {
-        return repo.save(new Category(category.getName())).getId();
+    @Transactional
+    public int create(CategoryDto dto) {
+        return repo.save(new Category(dto.getName())).getId();
     }
 }
