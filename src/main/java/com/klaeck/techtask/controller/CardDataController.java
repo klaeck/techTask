@@ -13,8 +13,8 @@ public class CardDataController {
     private CardService service;
 
     @PutMapping
-    public int createCard(@RequestBody CardRequestDto cardRequestDto) {
-        return service.create(cardRequestDto);
+    public int createCard(@RequestBody CardRequestDto dto) {
+        return service.create(dto);
     }
 
     @DeleteMapping("/{id}")
@@ -23,15 +23,15 @@ public class CardDataController {
     }
 
     @PostMapping("/{id}")
-    public void updateCard(@PathVariable(name = "id") int idToUpd,
-                           @RequestBody CardRequestDto cardRequestDto) {
-        service.update(idToUpd, cardRequestDto);
+    public void updateCard(@PathVariable(name = "id") int id,
+                           @RequestBody CardRequestDto dto) {
+        service.update(id, dto);
     }
 
     @PostMapping("/{id}/addCategories")
-    public void addCategoriesToCard(@PathVariable(name = "id") int idToUpd,
-                                    @RequestBody CardRequestDto cardRequestDto) {
-        service.addCategories(idToUpd, cardRequestDto);
+    public void addCategoriesToCard(@PathVariable(name = "id") int id,
+                                    @RequestBody CardRequestDto dto) {
+        service.addCategories(id, dto);
     }
 
     @GetMapping("/{id}")

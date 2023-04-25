@@ -12,7 +12,7 @@ public class Category {
     private Integer id;
 
     @Column(name = "name")
-    public String name;
+    private String name;
 
     public Category() {}
 

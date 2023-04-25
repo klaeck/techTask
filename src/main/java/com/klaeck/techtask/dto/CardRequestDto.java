@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 public class CardRequestDto {
     @Min(value = 1, message = "Name of the card should be at least 1 character long")
-    String name;
+    private String name;
 
     private List<Integer> categoryIds;
 

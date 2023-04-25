@@ -12,8 +12,8 @@ public class CategoryDataController {
     private CategoryService service;
 
     @PutMapping
-    public int createCategory(@RequestBody CategoryDto category) {
-        return service.create(category);
+    public int createCategory(@RequestBody CategoryDto dto) {
+        return service.create(dto);
     }
 
     @DeleteMapping("/{id}")
@@ -22,8 +22,8 @@ public class CategoryDataController {
     }
 
     @PostMapping("/{id}")
-    public void updateCategory(@PathVariable(name = "id") int idToUpd, @RequestBody CategoryDto category) {
-        service.update(idToUpd, category);
+    public void updateCategory(@PathVariable(name = "id") int id, @RequestBody CategoryDto dto) {
+        service.update(id, dto);
     }
 
     @GetMapping("/{id}")
