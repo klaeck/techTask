@@ -27,13 +27,13 @@ class CardService {
     }
 
     @Transactional(readOnly = true)
-    public CardResponseDto read(int id) {
+    CardResponseDto read(int id) {
         Card card = cardRepo.findById(id).orElseThrow(NotFoundException::new);
         return new CardResponseDto(card);
     }
 
     @Transactional
-    public void update(int id, CardRequestDto update) {
+    void update(int id, CardRequestDto update) {
         Card card = cardRepo.findById(id).orElseThrow(NotFoundException::new);
 
         if (update.getName() != null) {
@@ -47,7 +47,7 @@ class CardService {
     }
 
     @Transactional
-    public int create(CardRequestDto dto) {
+    int create(CardRequestDto dto) {
         int cardId = cardRepo.save(new Card(dto.getName())).getId();
 
         List<Integer> categoriesToInsert = new ArrayList<>();
@@ -72,7 +72,7 @@ class CardService {
     }
 
     @SuppressWarnings("unchecked")
-    private void insertCardToCategoryDependencies(int cardId, List<Integer> categoryIds) {
+    void insertCardToCategoryDependencies(int cardId, List<Integer> categoryIds) {
         Map<String, Integer>[] dataToInsert = categoryIds.stream()
                 .map(categoryId -> {
                     Map<String, Integer> map = new HashMap<>(1);
@@ -88,12 +88,12 @@ class CardService {
     }
 
     @Transactional
-    public void delete(int id) {
+    void delete(int id) {
         cardRepo.deleteById(id);
     }
 
     @Transactional
-    public void addCategories(int cardId, CardRequestDto dto) {
+    void addCategories(int cardId, CardRequestDto dto) {
         if (dto.getCategoryIds() == null) {
             return;
         }

@@ -9,7 +9,7 @@ public class CategoryDto {
     @Min(value = 1, message = "Name of the category should be at least 1 character long")
     private String name;
 
-    public CategoryDto() {}
+    CategoryDto() {}
 
     public CategoryDto(Category category) {
         this.name = category.getName();

@@ -27,7 +27,7 @@ class Card {
 
     public Card() {}
 
-    public Card(String name) {
+    Card(String name) {
         this.name = name;
     }
 }

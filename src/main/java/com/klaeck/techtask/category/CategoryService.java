@@ -8,19 +8,19 @@ import org.springframework.transaction.annotation.Transactional;
 class CategoryService {
     private final CategoryRepo repo;
 
-    public CategoryService(CategoryRepo repo) {
+    CategoryService(CategoryRepo repo) {
         this.repo = repo;
     }
 
     @Transactional(readOnly = true)
-    public CategoryDto read(int id) {
+    CategoryDto read(int id) {
         Category category = repo.findById(id).orElseThrow(NotFoundException::new);
 
         return new CategoryDto(category);
     }
 
     @Transactional
-    public void update(int id, CategoryDto dto) {
+    void update(int id, CategoryDto dto) {
         if (dto.getName() == null) {
             return;
         }
@@ -30,12 +30,12 @@ class CategoryService {
     }
 
     @Transactional
-    public void delete(int id) {
+    void delete(int id) {
         repo.deleteById(id);
     }
 
     @Transactional
-    public int create(CategoryDto dto) {
+    int create(CategoryDto dto) {
         return repo.save(new Category(dto.getName())).getId();
     }
 }

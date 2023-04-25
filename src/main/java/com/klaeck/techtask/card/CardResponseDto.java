@@ -11,7 +11,7 @@ class CardResponseDto {
     private String name;
     private List<CategoryDto> categories;
 
-    public CardResponseDto(Card card) {
+    CardResponseDto(Card card) {
         this.name = card.getName();
         this.categories = card.getCategories().stream()
                 .map(CategoryDto::new)
